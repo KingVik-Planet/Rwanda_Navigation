@@ -18,18 +18,24 @@ def search_location(query):
         return None
 
 # Create a Streamlit app
-st.title("Interactive Map with Streamlit")
+st.title("Welcome, This is Rwanda Navigation, Let's Explore")
+
+# User input for location
+query = st.text_input("Enter Location of Interest:")
 
 # Create a map centered at Kigali, Rwanda
 kigali_location = [-1.9536, 30.0606]
 m = folium.Map(location=kigali_location, zoom_start=12)
 
-# Display the map using folium_static
-st.write("Interactive Map:")
-folium_static(m)
+# Add OpenStreetMap tiles as the base layer
+folium.TileLayer('openstreetmap').add_to(m)
 
-# User input for location
-query = st.text_input("Enter Location of Interest:")
+# Add Stamen Terrain tiles as a satellite view with attribution
+folium.TileLayer('Stamen Terrain', attr='Stamen').add_to(m)
+
+# Display the map using folium_static
+st.write("Let's Explore:")
+folium_static(m)
 
 # Check if the query is not empty
 if query:
